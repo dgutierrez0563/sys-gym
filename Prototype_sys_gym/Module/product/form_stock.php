@@ -36,10 +36,18 @@
       var entry = eval(stock_aux) + eval(qty);
     }
     if (option_aux == "output"){
-      document.formRequest.total_stok.value = (output);
+      if(stock_aux == "" || stock_aux == 0){
+        document.formRequest.total_stok.value = "";
+      }else{
+        document.formRequest.total_stok.value = (output);
+      }
     }
     else {
-      document.formRequest.total_stok.value = (entry);
+      if(stock_aux == ""){
+        document.formRequest.total_stok.value = "";
+      }else{
+        document.formRequest.total_stok.value = (entry);
+      }
     }
   }
 </script>

@@ -43,7 +43,7 @@ if (isset($_GET['id'])) {
 
             <div class="form-group">
               <label class="col-sm-2 control-label">Rate</label>
-              <label style="text-align:left" class="col-sm-8 control-label">: $ <?php echo number_format($data['Costo'],2); ?></label>
+              <label style="text-align:left" class="col-sm-8 control-label">: ₡ <?php echo number_format($data['Costo'],2); ?></label>
             </div>
           
             <div class="form-group">

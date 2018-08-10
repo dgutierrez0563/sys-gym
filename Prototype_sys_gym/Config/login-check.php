@@ -9,7 +9,7 @@ if (!ctype_alnum($usernameC) AND !ctype_alnum($passwordC)) {
 	header("Location: ../../index.php?alert=1");
 }
 else {
-	$query = mysqli_query($mysqli, "SELECT * FROM usuario WHERE NombreUsuario='$usernameC' AND Contrasenia='$passwordC' AND Estado='Enabled'");// or die('error'.mysqli_error($mysqli));	
+	$query = mysqli_query($mysqli, "SELECT * FROM usuario WHERE NombreUsuario='$usernameC' AND Contrasenia='$passwordC' AND Estado='Enabled'");
 	$rows  = mysqli_num_rows($query);
 
 	if ($query) {
@@ -33,5 +33,4 @@ else {
 	}else{
 		header("Location: ../index.php?alert=4");
 	}
-
 }?>

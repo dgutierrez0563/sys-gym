@@ -7,7 +7,7 @@ if ($_GET['form']=='add') { ?>
       <i class="fa fa-edit icon-title"></i> Add Customer Profile
     </h1>
     <ol class="breadcrumb">
-      <li><a href="?module=berenda"><i class="fa fa-home"></i> Home </a></li>
+      <li><a href="?module=start"><i class="fa fa-home"></i> Home </a></li>
       <li><a href="?module=customer"> Customer Profile </a></li>
       <li class="active"> Add </li>
     </ol>
@@ -56,42 +56,42 @@ if ($_GET['form']=='add') { ?>
               <div class="form-group">
                 <label class="col-sm-2 control-label">Body Fat</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="bodyfat" maxlength="6" placeholder="70.5" onKeyPress="return filterFloat(event,this)" autocomplete="off" required>
+                  <input type="text" class="form-control" name="bodyfat" maxlength="6" placeholder="70.5" onKeyPress="return filterFloatCustomer(event,this)" autocomplete="off" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">Water</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="water" maxlength="6" autocomplete="off" onKeyPress="return filterFloat(event,this)" required>
+                  <input type="text" class="form-control" name="water" maxlength="6" autocomplete="off" onKeyPress="return filterFloatCustomer(event,this)" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">IMC</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="imc" maxlength="6" autocomplete="off" onKeyPress="return filterFloat(event,this)" required>
+                  <input type="text" class="form-control" name="imc" maxlength="6" autocomplete="off" onKeyPress="return filterFloatCustomer(event,this)" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">BMR</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="bmr" maxlength="6" autocomplete="off" onKeyPress="return filterFloat(event,this)" required>
+                  <input type="text" class="form-control" name="bmr" maxlength="6" autocomplete="off" onKeyPress="return filterFloatCustomer(event,this)" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">Bone Mass</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="bonemass" maxlength="6" autocomplete="off" onKeyPress="return filterFloat(event,this)" required>
+                  <input type="text" class="form-control" name="bonemass" maxlength="6" autocomplete="off" onKeyPress="return filterFloatCustomer(event,this)" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">Visceral Fat</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="visceralfat" maxlength="6" autocomplete="off" onKeyPress="return filterFloat(event,this)" required>
+                  <input type="text" class="form-control" name="visceralfat" maxlength="6" autocomplete="off" onKeyPress="return filterFloatCustomer(event,this)" required>
                 </div>
               </div>
             </div><!-- /.box body -->
@@ -166,56 +166,56 @@ elseif ($_GET['form']=='edit') {
               <div class="form-group">
                 <label class="col-sm-2 control-label">Height</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="height" maxlength="15" autocomplete="off" onKeyPress="return goodchars(event,'0123456789',this)" value="<?php echo $data['Altura']; ?>" required>
+                  <input type="text" class="form-control" name="height" maxlength="15" autocomplete="off" onKeyPress="return filterFloatCustomer(event,this)" value="<?php echo $data['Altura']; ?>" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">Weight</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="weight" maxlength="50" autocomplete="off" value="<?php echo $data['Peso']; ?>" required>
+                  <input type="text" class="form-control" name="weight" maxlength="50" autocomplete="off" onKeyPress="return filterFloatCustomer(event,this)" value="<?php echo $data['Peso']; ?>" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">Body Fat</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="bodyfat" maxlength="50" autocomplete="off" value="<?php echo $data['GrasaCorporal']; ?>" required>
+                  <input type="text" class="form-control" name="bodyfat" maxlength="50" autocomplete="off" onKeyPress="return filterFloatCustomer(event,this)" value="<?php echo $data['GrasaCorporal']; ?>" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">Water</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="water" maxlength="50" autocomplete="off" value="<?php echo $data['Agua']; ?>" required>
+                  <input type="text" class="form-control" name="water" maxlength="50" autocomplete="off" onKeyPress="return filterFloatCustomer(event,this)" value="<?php echo $data['Agua']; ?>" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">IMC</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="imc" maxlength="50" autocomplete="off" value="<?php echo $data['IMC']; ?>" required>
+                  <input type="text" class="form-control" name="imc" maxlength="50" autocomplete="off" onKeyPress="return filterFloatCustomer(event,this)" value="<?php echo $data['IMC']; ?>" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">BMR</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="bmr" maxlength="50" autocomplete="off" value="<?php echo $data['BMR']; ?>" required>
+                  <input type="text" class="form-control" name="bmr" maxlength="50" autocomplete="off" onKeyPress="return filterFloatCustomer(event,this)" value="<?php echo $data['BMR']; ?>" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">Bone Mass</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="bonemass" maxlength="50" autocomplete="off" value="<?php echo $data['MasaOsea']; ?>" required>
+                  <input type="text" class="form-control" name="bonemass" maxlength="50" autocomplete="off" onKeyPress="return filterFloatCustomer(event,this)" value="<?php echo $data['MasaOsea']; ?>" required>
                 </div>
               </div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">Visceral Fat</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="visceralfat" maxlength="50" autocomplete="off" value="<?php echo $data['GrasaViceral']; ?>" required>
+                  <input type="text" class="form-control" name="visceralfat" maxlength="50" autocomplete="off" onKeyPress="return filterFloatCustomer(event,this)" value="<?php echo $data['GrasaViceral']; ?>" required>
                 </div>
               </div>
             </div><!-- /.box body -->

@@ -11,7 +11,7 @@ else {
 
 	if ($_GET['act']=='insert') {
 		if (isset($_POST['Guardar'])) {
-	
+
 			$nameplan  	= mysqli_real_escape_string($mysqli, trim($_POST['nameplan']));
 			$days  		= mysqli_real_escape_string($mysqli, trim($_POST['days']));
 			$rate 		= mysqli_real_escape_string($mysqli, trim($_POST['rate']));
@@ -19,14 +19,22 @@ else {
 
 			$id_user = $_SESSION['IDUsuario'];
 
-            $query = mysqli_query($mysqli, "INSERT INTO plan(NombrePlan,CantidadDias,Costo,
-            								Detalle,created_user,updated_user)
-                                            VALUES('$nameplan','$days','$rate','$detail','$id_user','$id_user')")
-                                            or die('error: '.mysqli_error($mysqli));              
-            
-            if ($query) {
-                header("location: ../../main.php?module=plan&alert=1");
-            }
+			$query_name = mysqli_query($mysqli,"SELECT NombrePlan FROM plan 
+				WHERE NombrePlan='$nameplan'");
+			$count = mysqli_num_rows($query_name);
+
+			if ($count == 0) {
+	            $query = mysqli_query($mysqli, "INSERT INTO plan(NombrePlan,CantidadDias,Costo,
+	            								Detalle,created_user,updated_user)
+	                                            VALUES('$nameplan','$days','$rate','$detail','$id_user','$id_user')")
+	                                            or die('error: '.mysqli_error($mysqli));              
+	            
+	            if ($query) {
+	                header("location: ../../main.php?module=plan&alert=1");
+	            }
+			} else {
+				header("location: ../../main.php?module=plan&alert=5");
+			}
 		}	
 	}
 	

@@ -1,6 +1,6 @@
 <section class="content-header">
   <h1>
-    <i class="glyphicon glyphicon-tags icon-title"></i> Management of Plan
+    <i class="glyphicon glyphicon-tags icon-title"></i> Plan Management
 
     <a class="btn btn-primary btn-social pull-right" href="?module=form_plan&form=add" title="Agregar" data-toggle="tooltip">
       <i class="fa fa-plus"></i> Add Plan
@@ -22,38 +22,47 @@
     elseif ($_GET['alert'] == 1) {
       echo "<div class='alert alert-success alert-dismissable'>
               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-              <h4>  <i class='icon fa fa-check-circle'></i> Exito!</h4>
-              El nuevo plan se ha registrado satisfactoriamente.
+              <h4>  <i class='icon fa fa-check-circle'></i> Success!</h4>
+              Added plan.
             </div>";
     }
 
     elseif ($_GET['alert'] == 2) {
       echo "<div class='alert alert-success alert-dismissable'>
               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-              <h4>  <i class='icon fa fa-check-circle'></i> Exito!</h4>
-           Los datos del plan han sido actualizados satisfactoriamente.
+              <h4>  <i class='icon fa fa-check-circle'></i> Success!</h4>
+              Updated plan.
             </div>";
     }
 
     elseif ($_GET['alert'] == 3) {
       echo "<div class='alert alert-success alert-dismissable'>
               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-              <h4>  <i class='icon fa fa-check-circle'></i> Exito!</h4>
-            El plan ha sido activado satisfactoriamente.
+              <h4>  <i class='icon fa fa-check-circle'></i> Success!</h4>
+              Plan Activated.
             </div>";
     }
  
     elseif ($_GET['alert'] == 4) {
       echo "<div class='alert alert-success alert-dismissable'>
               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-              <h4>  <i class='icon fa fa-check-circle'></i> Exito!</h4>
-             El plan se bloqueó satisfactoriamente.
+              <h4>  <i class='icon fa fa-check-circle'></i> Success!</h4>
+              Desactivated plan.
+            </div>";
+    }
+    elseif ($_GET['alert'] == 5) {
+      echo "<div class='alert alert-danger alert-dismissable'>
+              <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+              <h4>  <i class='icon fa fa-times-circle'></i> Error!</h4>
+              Please, check the required fields.
             </div>";
     }
     ?>
-
+    <?php 
+      if ($_SESSION['Role'] == 'Admin') { ?>
       <div class="box box-primary">
-        <div class="box-body">     
+        <div class="box-body">
+        <div class="table-responsive">
           <table id="dataTables1" class="table row-border table-hover">
             <thead>
               <tr class="info">
@@ -82,7 +91,7 @@
                       <td class='center'>$no</td>
                       <td>$data[NombrePlan]</td>
                       <td class='center'>$data[CantidadDias]</td>
-                      <td>$price_aux</td>
+                      <td>₡ $price_aux</td>
                       <td>$data[Detalle]</td>                      
                       <td class='center'>$data[Estado]</td>
                       <td class='center'>
@@ -110,8 +119,64 @@
               $no++; } ?>
             </tbody>
           </table>
+          </div>
         </div><!-- /.box-body -->
       </div><!-- /.box -->
+      <?php
+      } elseif ($_SESSION['Role'] == 'User') { ?>
+        <div class="box box-primary">
+          <div class="box-body">
+          <div class="table-responsive">
+            <table id="dataTables1" class="table row-border table-hover">
+              <thead>
+                <tr class="info">
+                  <th class="center">No.</th>
+                  <th>Type Plan</th>
+                  <th class="center">Days</th>
+                  <th>Rate</th>
+                  <th>Detail</th>                
+                  <th class="center">Status</th>        
+                  <th class="center">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+              <?php  
+              $no = 1;
+        
+              $query = mysqli_query($mysqli, "SELECT IDPlan,NombrePlan,CantidadDias,Costo,
+                                              Detalle,Estado 
+                                              FROM plan ORDER BY NombrePlan ASC")
+                                              or die('error: '.mysqli_error($mysqli));
+
+              while ($data = mysqli_fetch_assoc($query)) { 
+                $price_aux = $data['Costo'];
+                $price_aux = number_format($price_aux,2);
+                echo "<tr style='width: auto;'>
+                        <td class='center'>$no</td>
+                        <td>$data[NombrePlan]</td>
+                        <td class='center'>$data[CantidadDias]</td>
+                        <td>₡ $price_aux</td>
+                        <td>$data[Detalle]</td>                      
+                        <td class='center'>$data[Estado]</td>
+                        <td class='center'>
+                          <div>";
+
+                          echo "
+                              <a data-toggle='tooltip' data-placement='top' title='Detail'  class='btn btn-info btn-xs' href='?module=detailPlan&detail&id=$data[IDPlan]'>
+                                  <i style='color:#fff' class='glyphicon glyphicon-eye-open'></i>
+                              </a>
+                          </div>         
+                        </td>
+                      </tr>";
+                $no++; } ?>
+              </tbody>
+            </table>
+            </div>
+          </div><!-- /.box-body -->
+        </div><!-- /.box -->
+      <?php
+      }
+    ?>
     </div><!--/.col -->
   </div>   <!-- /.row -->
 </section><!-- /.content -->

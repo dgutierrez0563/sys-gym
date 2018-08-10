@@ -1,9 +1,5 @@
 
-<?php
-	
-	//session_start();
-
-	//require_once "../../Config/database.php";
+<?php	
 
 	if (isset($_GET['id'])) {
 	    $id_invoice = $_GET['id'];
@@ -50,7 +46,6 @@
 		        <table cellspacing="0" style="width: 90%;">
 		            <tr>
 		                <td style="width: 25%; color: #444444;">
-		                    <!-- <img style="width: 100%;" src="../../Content/assets/img/logo.png" alt="Logo"><br>                     -->
 		                </td>
 		                <td style="width: 75%;text-align:right">
 		                    INVOICE N° <?php echo $data_aux['IDFactura'];?>
@@ -58,15 +53,14 @@
 		                <hr>
 		            </tr>
 		        </table>
-		        <br>
-		        
+		        <br>		        
 		        <br>
 		        <table cellspacing="0" style="width: 90%; text-align: left; font-size: 10pt;">
 		            <tr>
 		            <td style="width:50%; "><strong>Address</strong> <br>Santa Rita, Rio Cuarto<br> Phone.: (+506) 2465-0099</td>        
 		            </tr>
 		        </table>
-<br>
+				<br>
 		        <table cellspacing="0" style="width: auto; text-align: left; font-size: 11pt;">
 		            <tr>
 		                <td style="width: 10%;">Customer:</td>
@@ -119,7 +113,6 @@
 		                $price_unit = $price_sale/$quantity_sale;
 		                $price_unit = number_format($price_unit,2);
 		                $total_price_invoice+=$price_sale;
-		                //$total = number_format($total_price_invoice,2);
 		                
 		                ?>
 		                
@@ -135,7 +128,7 @@
 		                <table cellspacing="0" style="width: 90%; border: solid 1px black; background: #E7E7E7; text-align: center; font-size: 11pt;padding:1mm;">
 		                    <tr>
 		                        <th style="width: 80%; text-align: right;">TOTAL : </th>
-		                        <th style="width: 13%; text-align: right;">&#36; <?php echo number_format($total_price_invoice,2);?></th>
+		                        <th style="width: 13%; text-align: right;">&#189; <?php echo number_format($total_price_invoice,2);?></th>
 		                    </tr>
 		                </table>
 		                <br><br><br><br>

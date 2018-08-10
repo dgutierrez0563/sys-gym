@@ -1,9 +1,9 @@
 <section class="content-header">
   <h1>
-    <i class="fa fa-lock icon-title"></i> Modify the Password
+    <i class="fa fa-lock icon-title"></i> Change the Password
   </h1>
   <ol class="breadcrumb">
-    <li><a href="?module=berenda"><i class="fa fa-home"></i> Home</a></li>
+    <li><a href="?module=start"><i class="fa fa-home"></i> Home</a></li>
     <li class="active">Password</li>
     <li class="active">Modify</li>
   </ol>
@@ -24,7 +24,7 @@
       echo "<div class='alert alert-danger alert-dismissable'>
               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
               <h4>  <i class='icon fa fa-times-circle'></i> Error!</h4>
-             Please, check the old password.
+              Please, check the old password.
             </div>";
     }
     
@@ -39,8 +39,8 @@
     elseif ($_GET['alert'] == 3) {
       echo "<div class='alert alert-success alert-dismissable'>
               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-              <h4>  <i class='icon fa fa-check-circle'></i> Exitp!</h4>
-          Password changed successfully.
+              <h4>  <i class='icon fa fa-check-circle'></i> Success!</h4>
+              Password changed successfully.
             </div>";
     }
     ?>
@@ -48,9 +48,9 @@
 
       <div class="box box-primary">
         <!-- form start -->
-        <form role="form" class="form-horizontal" method="POST" action="Module/password/proses.php">
+        <form role="form" class="form-horizontal" method="POST" action="Module/password/proses.php?act=insert">
           <div class="box-body">
-
+          <br>
             <div class="form-group">
               <label class="col-sm-2 control-label">Old Password</label>
               <div class="col-sm-5">
@@ -59,7 +59,7 @@
             </div>
 
             <div class="form-group">
-              <label class="col-sm-2 control-label">New Password</label>
+              <label class="col-sm-2 control-label">New password</label>
               <div class="col-sm-5">
                 <input type="password" class="form-control" name="new_pass" autocomplete="off" required>
               </div>
@@ -72,14 +72,16 @@
               </div>
             </div>
           </div><!-- /.box-body -->
-          
+          <br>
           <div class="box-footer bg-btn-action">
+          <br>
             <div class="form-group">
               <div class="col-sm-offset-2 col-sm-10">
                 <input type="submit" class="btn btn-primary btn-submit" name="Guardar" value="Save">
                 <a href="?module=start" class="btn btn-default btn-reset">Cancel</a>
               </div>
             </div>
+            <br>
           </div>
         </form>
       </div><!-- /.box -->

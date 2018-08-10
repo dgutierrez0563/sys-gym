@@ -33,8 +33,7 @@ if (isset($_POST['id'])) {
 					$qty_aux = 0;
 					$qty_aux = ($data_s['Quantity'] + $cantidad);
 					$price_total_aux = ($qty_aux*$precio);
-					$insert_tmp = mysqli_query($mysqli, "UPDATE shoppingBag SET Quantity='$qty_aux',PriceTotal='$price_total_aux'
-														WHERE IDProducto='$id'");
+					$insert_tmp = mysqli_query($mysqli, "UPDATE shoppingBag SET Quantity='$qty_aux',PriceTotal='$price_total_aux' WHERE IDProducto='$id'");
 				}				
 			}
 
@@ -79,10 +78,10 @@ if (isset($_POST['id'])) {
 			<td><?php echo $nombre_producto;?></td>
 			<td><?php echo $cantidad;?></td>
 			<td>
-				<span class="pull-right"><?php echo number_format($precio_venta,1);?></span>
+				<span class="pull-right"><?php echo number_format($precio_venta,2);?></span>
 			</td>
 			<td>
-				<span class="pull-right"><?php echo number_format($precio_total,1);?></span>
+				<span class="pull-right"><?php echo number_format($precio_total,2);?></span>
 			</td>
 			<td style="text-align: center;">
 				<a style="color:red; font-size: 14px;" data-toggle="tooltip" data-placement="top" title="Remove" onclick="eliminar('<?php echo $id_tmp ?>')"><i class="glyphicon glyphicon-trash"></i></a>
@@ -93,8 +92,8 @@ if (isset($_POST['id'])) {
 			}
 		?>
 		<tr>
-			<td colspan=4 style="border-color: #686868;"><strong class="pull-right">TOTAL</strong></td>
-			<td style="text-align: right; border-color: #686868;"><strong>$<?php echo number_format($sumador_total,1);?></strong></td>
+			<td colspan=4 style="border-color: #686868;"><strong class="pull-right">TOTAL I.V.A</strong></td>
+			<td style="text-align: right; border-color: #686868;"><strong>₡ <?php echo number_format($sumador_total,2);?></strong></td>
 			<td style="border-color: #686868"></td>
 		</tr>
 	</table>

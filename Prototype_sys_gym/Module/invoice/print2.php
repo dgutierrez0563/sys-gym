@@ -8,10 +8,13 @@
     $query_bag = mysqli_query($mysqli,"SELECT * FROM shoppingBag");
     $count_bag = mysqli_num_rows($query_bag);
 
-    if ($count_bag == 0) {
-        echo "<script>alert('There aren't products in the invoice')</script>";
-        echo "<script>window.close();</script>";
-        exit;
+    if ($count_bag == 0) { ?>
+        <script>
+            alert("Error!\nThere aren't products in the invoice");
+            window.close();
+        </script>
+    <?php
+        echo alert();
     }
 
     $dateInvoice = date("m/d/Y");
@@ -55,15 +58,12 @@
 
     <table cellspacing="0" style="width: 100%;">
         <tr>
-
             <td style="width: 25%; color: #444444;">
-                <img style="width: 100%;" src="../../Content/assets/img/logo.png" alt="Logo"><br>
-                
+                <img style="width: 100%;" src="../../Content/assets/img/sysgym.png" alt="Logo"><br>
             </td>
             <td style="width: 75%;text-align:right">
             INVOICE No. <?php echo $IDLastInvoice;?>
             </td>
-            
         </tr>
     </table>
     <br>
@@ -128,8 +128,7 @@
             <th style="width: 10%">Q.</th>
             <th style="width: 60%">Description</th>
             <th style="width: 15%">Unit Price</th>
-            <th style="width: 15%">Total Price</th>
-            
+            <th style="width: 15%">Total Price</th>            
         </tr>
     </table>
 <?php
@@ -137,10 +136,11 @@
 $sumador_total=0;
 $sum_result = 0;
 
-$query_sql = mysqli_query($mysqli, "SELECT producto.IDProducto AS productoID,producto.NombreProducto,producto.Cantidad,
-                                    producto.Precio, shoppingBag.IDShoppingBag,shoppingBag.IDProducto AS productoBagID,
-                                    shoppingBag.Quantity FROM producto, shoppingBag WHERE producto.IDProducto = shoppingBag.IDProducto")
-                                or die('error: '.mysqli_error($mysqli));
+$query_sql = mysqli_query($mysqli, "SELECT producto.IDProducto AS productoID,producto.NombreProducto,
+    producto.Cantidad,producto.Precio,shoppingBag.IDShoppingBag,shoppingBag.IDProducto AS productoBagID,
+    shoppingBag.Quantity FROM producto, shoppingBag
+    WHERE producto.IDProducto = shoppingBag.IDProducto")
+    or die('error: '.mysqli_error($mysqli));
 
 while ($row=mysqli_fetch_array($query_sql))
 {
@@ -183,8 +183,8 @@ while ($row=mysqli_fetch_array($query_sql))
 ?>
     <table cellspacing="0" style="width: 100%; border: solid 1px black; background: #E7E7E7; text-align: center; font-size: 11pt;padding:1mm;">
         <tr>
-            <th style="width: 87%; text-align: right;">TOTAL : </th>
-            <th style="width: 13%; text-align: right;">&#36; <?php echo number_format($sumador_total,2);?></th>
+            <th style="width: 87%; text-align: right;">Total en colones : </th>
+            <th style="width: 13%; text-align: right;"><?php echo number_format($sumador_total,2);?></th>
         </tr>
     </table>
     <p>
@@ -218,10 +218,10 @@ while ($row=mysqli_fetch_array($query_sql))
         <table class="page_footer">
             <tr>
                 <td style="width: 50%; text-align: left">
-                    
+                    Page [[page_cu]]/[[page_nb]]
                 </td>
                 <td style="width: 50%; text-align: right">
-                    &copy; <?php echo "wsullivan "; echo  $anio=date('Y'); ?>
+                    &copy; <?php echo "Developed by wsullivan "; echo  $anio=date('Y'); ?>
                 </td>
             </tr>
         </table>

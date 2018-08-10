@@ -1,11 +1,11 @@
 <section class="content-header">
     <h1>
-      <i class="fa fa-edit icon-title"></i> Payment report by date
+      <i class="fa fa-search icon-title"></i> Expense report by date
     </h1>
     <ol class="breadcrumb">
-    	<li><a href="?module=berenda"><i class="fa fa-home"></i> Home </a></li>
+    	<li><a href="?module=start"><i class="fa fa-home"></i> Home </a></li>
     	<li class="active"> Report</li>
-	    <li class="active"> Payment by date </li>
+	    <li class="active"> Expense by date </li>
  	</ol>
 </section>
 
@@ -19,16 +19,16 @@
 	        <br>
 			    <div class="panel panel-info">
 			      	<div class="panel-heading">
-						<h4><i class='glyphicon glyphicon-search'></i> Select dates please</h4>
+						<h4><i class='glyphicon glyphicon-calendar'></i> Select dates please</h4>
 			      	</div>
 			      	<div class="panel-body">
 			        <br>
 			            <div class="form-group">
-			              <label for="date_initial" class="col-md-1 control-label">Date from</label>
+			              <label for="date_initial" class="col-md-1 control-label">From</label>
 			              <div class="col-sm-2">
 			                <input type="date" class="form-control" name="date_initial" autocomplete="off" required>
 			              </div>
-			              <label for="date_final" class="col-md-1 control-label">Date to</label>
+			              <label for="date_final" class="col-md-1 control-label">To</label>
 			              <div class="col-sm-2">
 			                <input style="margin-left:-15px" type="date" class="form-control" name="date_final" autocomplete="off" required>
 			              </div>

@@ -5,7 +5,6 @@ ob_start();
 
 require_once "../../Config/database.php";
 
-//$hari_ini = date("d-m-Y");
 
 $date_initial = $_GET['date_initial'];
 $date_final = $_GET['date_final'];
@@ -36,9 +35,12 @@ if (isset($_GET['date_initial']) && isset($_GET['date_final'])) {
         </style>
     </head>
     <body>
+    <br>
         <div>
-          <img style="height:40px;width: 120px;" src="../../Content/assets/img/logo.png" alt="Logo">
+          <img style="height:40px;width: 120px;" src="../../Content/assets/img/sysgym.png" alt="Logo">
         </div>
+        <br>
+        <br>
         <div>
            <table>
             <tr><td><span style="font-size:15px">SYSGYM</span></td></tr>
@@ -46,7 +48,7 @@ if (isset($_GET['date_initial']) && isset($_GET['date_final'])) {
         </div>
         <div>
            <table>
-            <tr><td>Report Payment And Invoice</td></tr>
+            <tr><td>Payments Report</td></tr>
            </table>
         </div>
     <?php  
@@ -73,10 +75,10 @@ if (isset($_GET['date_initial']) && isset($_GET['date_final'])) {
         </div>
     <?php
     }
-    ?>        
+    ?>
         <hr><br>
         <div id="isi">
-            <table width="100%" border="0.1" cellpadding="0" cellspacing="0">
+            <table width="100%" border="0.1" cellpadding="0" cellspacing="0" style="margin-left: 6px;">
                 <thead style="background:#e8ecee">
                     <tr class="tr-title">
                         <th height="20" style="width: 30px" align="center" valign="middle">NO.</th>
@@ -88,20 +90,10 @@ if (isset($_GET['date_initial']) && isset($_GET['date_final'])) {
                     </tr>
                 </thead>
                 <tbody>
-    <?php
-    
-    if($count == 0) {
-     //    echo "  <tr>
-     //                <td width='40' height='13' align='center' valign='middle'></td>
-     //                <td width='120' height='13' align='center' valign='middle'></td>
-     //                <td width='80' height='13' align='center' valign='middle'></td>
-     //                <td width='80' height='13' align='center' valign='middle'></td>
-     //                <td style='padding-left:5px;' width='155' height='13' valign='middle'></td>
-					// <td style='padding-left:5px;' width='50' height='13' valign='middle'></td>
-     //                <td style='padding-right:10px;' width='50' height='13' align='right' valign='middle'></td>
-     //                <td width='90' height='13' align='center' valign='middle'></td>
-     //            </tr>";
-        ?>
+                <?php
+                
+                if($count == 0) {
+                    ?>
                     <tr>
                         <td width='60' height='15' align='center' valign='middle'></td>
                         <td width='90' height='15' align='center' valign='middle'></td>
@@ -110,43 +102,43 @@ if (isset($_GET['date_initial']) && isset($_GET['date_final'])) {
                         <td style='padding-left:5px;' width='100' height='13' valign='middle'></td>
                         <td style='padding-left:5px;' width='110' height='13' valign='middle'></td>
                     </tr>
-   <?php }
+               <?php }
 
-    else {
+                else {
 
-        $total = 0;
-        while ($data = mysqli_fetch_assoc($query)) {
+                    $total = 0;
+                    while ($data = mysqli_fetch_assoc($query)) {
 
-            $date_aux = date_create($data['FechaFactura']);
-            $date_aux = date_format($date_aux,'m/d/Y');
-            $total_aux = $data['Monto'];
-            $total_invoice = number_format($total_aux,2);
-            $total+=$total_aux;
+                        $date_aux = date_create($data['FechaFactura']);
+                        $date_aux = date_format($date_aux,'m/d/Y');
+                        $total_aux = $data['Monto'];
+                        $total_invoice = number_format($total_aux,2);
+                        $total+=$total_aux;
 
-            if ($data['EstadoFactura'] == "Credit") {
-                $status_invoice = "Pending";
-            }
-            else{
-                $status_invoice = "Paid";
-            }
-            echo "  <tr>
-                        <td width='60' height='15' align='center' valign='middle'>$no</td>
-                        <td width='90' height='15' align='center' valign='middle'>$data[NumeroFactura]</td>
-                        <td width='110' height='15' align='center' valign='middle'>$date_aux</td>
-                        <td width='190' height='15' align='center' valign='middle'>$data[NombreProveedor]</td>
-                        <td style='padding-left:5px;' align='center' width='100' height='15' valign='middle'>$status_invoice</td>
-						<td style='padding-left:5px;' width='110' height='15' valign='middle'>$total_invoice</td>
-                    </tr>";
-            $no++;
-        }
-    }
-?>
+                        if ($data['EstadoFactura'] == "Credit") {
+                            $status_invoice = "Pending";
+                        }
+                        else{
+                            $status_invoice = "Paid";
+                        }
+                        echo "  <tr>
+                                    <td width='60' height='15' align='center' valign='middle'>$no</td>
+                                    <td width='90' height='15' align='center' valign='middle'>$data[NumeroFactura]</td>
+                                    <td width='110' height='15' align='center' valign='middle'>$date_aux</td>
+                                    <td width='190' height='15' align='center' valign='middle'>$data[NombreProveedor]</td>
+                                    <td style='padding-left:5px;' align='center' width='100' height='15' valign='middle'>$status_invoice</td>
+            						<td style='padding-left:5px;' width='110' height='15' valign='middle'>$total_invoice</td>
+                                </tr>";
+                        $no++;
+                    }
+                }
+                ?>
                 </tbody>
                 <tfoot>
                     <tr valign="middle">
-                        <td colspan="5" style="text-align: right;height:15;"><strong>Total </strong></td>
+                        <td colspan="5" style="text-align: right;height:15;"><strong>Total en colones </strong></td>
                         <td style="text-align:center;height:15">
-                            <strong>$ <?php if ($count == 0) {
+                            <strong><?php if ($count == 0) {
                                 echo number_format(0,2);
                             } else {
                                 echo number_format($total,2); }?>
@@ -155,19 +147,19 @@ if (isset($_GET['date_initial']) && isset($_GET['date_final'])) {
                     </tr>
                 </tfoot>
             </table>
-            <page_footer>
-                <table class="page_footer">
-                    <tr>
-                        <td style="width: 50%; text-align: left">
-                            Page [[page_cu]]/[[page_nb]]
-                        </td>
-                        <td style="width: 50%; text-align: right">
-                            &copy; <?php echo "Developed by wsullivan "; echo  $anio=date('Y'); ?>
-                        </td>
-                    </tr>
-                </table>                
-            </page_footer>
         </div>
+        <page_footer>
+            <table class="page_footer">
+                <tr>
+                    <td style="width: 50%; text-align: left">
+                        Page [[page_cu]]/[[page_nb]]
+                    </td>
+                    <td style="width: 50%; text-align: right">
+                        &copy; <?php echo "Developed by wsullivan "; echo  $anio=date('Y'); ?>
+                    </td>
+                </tr>
+            </table>                
+        </page_footer>
     </body>
 </html>
 <?php

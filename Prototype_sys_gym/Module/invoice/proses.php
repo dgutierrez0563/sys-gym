@@ -38,15 +38,45 @@ else {
 			}
 		}	
 	}
-	elseif ($_GET['act']=='deleteItem') {
-		if (isset($_GET['id'])) {
-			$id_item = $_GET['id'];
+	// elseif ($_GET['act']=='deleteItem') {
+	// 	if (isset($_GET['id'])) {
+	// 		$id_item = $_GET['id'];
 
-				$query = mysqli_query($mysqli, "DELETE FROM shoppingBag WHERE IDShoppingBag  = '$id_item'")
-					or die('error: '.mysqli_error($mysqli));
-	            if ($query) {
-	                header("location: ../../main.php?module=form_invoice&form=add");
-	            }				
+	// 			$query = mysqli_query($mysqli, "DELETE FROM shoppingBag WHERE IDShoppingBag  = '$id_item'")
+	// 				or die('error: '.mysqli_error($mysqli));
+	//             if ($query) {
+	//                 header("location: ../../main.php?module=form_invoice&form=add");
+	//             }				
+	// 	}
+	// }
+	elseif ($_GET['act']=='on') {
+		if (isset($_GET['id'])) {
+			
+			$id_invoice = $_GET['id'];
+			$status  = "Enabled";
+		
+            $query = mysqli_query($mysqli, "UPDATE factura SET Estado  = '$status'
+                                            WHERE IDFactura = '$id_invoice'")
+                                            or die('error: '.mysqli_error($mysqli));
+
+            if ($query) {               
+                header("location: ../../main.php?module=invoice&alert=1");
+            }
+		}
+	}
+	elseif ($_GET['act']=='off') {
+		if (isset($_GET['id'])) {
+			
+			$id_invoice = $_GET['id'];
+			$status  = "Disabled";
+		
+            $query = mysqli_query($mysqli, "UPDATE factura SET Estado  = '$status'
+                                            WHERE IDFactura = '$id_invoice'")
+                                            or die('error: '.mysqli_error($mysqli));
+        
+            if ($query) {              
+                header("location: ../../main.php?module=invoice&alert=2");
+            }
 		}
 	}
 }	

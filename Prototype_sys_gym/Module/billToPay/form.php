@@ -4,11 +4,11 @@ if ($_GET['form']=='add') { ?>
 
   <section class="content-header">
     <h1>
-      <i class="fa fa-edit icon-title"></i> Add Bill to Pay
+      <i class="fa fa-edit icon-title"></i> Add Expense
     </h1>
     <ol class="breadcrumb">
-      <li><a href="?module=berenda"><i class="fa fa-home"></i> Home </a></li>
-      <li><a href="?module=billToPay"> Bill to Pay </a></li>
+      <li><a href="?module=start"><i class="fa fa-home"></i> Home </a></li>
+      <li><a href="?module=billToPay"> Expense </a></li>
       <li class="active"> Add </li>
     </ol>
   </section>
@@ -24,7 +24,7 @@ if ($_GET['form']=='add') { ?>
               <div class="form-group">
                 <label class="col-sm-2 control-label">Supplier Name</label>
                 <div class="col-sm-5">
-                  <select class="chosen-select chosen-m" name="id_supplier" data-placeholder=" -- SELECT -- " autocomplete="off" onKeyPress="return goodchars(event,'0123456789',this)" >
+                  <select class="chosen-select chosen-m" id="id_supplier" name="id_supplier" data-placeholder=" -- SELECT -- " autocomplete="off" onKeyPress="return goodchars(event,'0123456789',this)" >
                     <option value=""></option>
                       <?php
                       $query = mysqli_query($mysqli, "SELECT IDProveedor,NombreProveedor FROM proveedor
@@ -42,15 +42,17 @@ if ($_GET['form']=='add') { ?>
               <div class="form-group">
                 <label class="col-sm-2 control-label">Invoice Number</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="invoice_number" maxlength="20" autocomplete="off" onKeyPress="return goodchars(event,'0123456789',this)" required>
+                  <input type="text" class="form-control" id="invoice_number" name="invoice_number" maxlength="20" autocomplete="off" onKeyPress="return goodchars(event,'0123456789',this)" required>
                 </div>
               </div>
+
+              <div id="result_bill_to_pay"></div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">Amount</label>
                 <div class="col-sm-5">
                   <div class="input-group">
-                    <span class="input-group-addon">$.</span>
+                    <span class="input-group-addon">₡.</span>
                     <input type="text" class="form-control" name="amount" maxlength="10" autocomplete="off" onKeyPress="return filterFloatPrice(event,this)" required>
                   </div>
                 </div>
@@ -115,7 +117,7 @@ elseif ($_GET['form']=='edit') {
       <i class="fa fa-edit icon-title"></i> Modify Bill to Pay
     </h1>
     <ol class="breadcrumb">
-      <li><a href="?module=berenda"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="?module=start"><i class="fa fa-home"></i> Home</a></li>
       <li><a href="?module=billToPay"> Bill to Pay </a></li>
       <li class="active"> Modify </li>
     </ol>
@@ -161,7 +163,7 @@ elseif ($_GET['form']=='edit') {
                 <label class="col-sm-2 control-label">Amount</label>
                 <div class="col-sm-5">
                   <div class="input-group">
-                    <span class="input-group-addon">$.</span>
+                    <span class="input-group-addon">₡.</span>
                     <input type="text" class="form-control" id="amount" name="amount" maxlength="10" autocomplete="off" onKeyPress="return filterFloat(event,this)" value="<?php echo $data['Monto']; ?>" required>
                   </div>
                 </div>

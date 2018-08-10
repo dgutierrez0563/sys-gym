@@ -22,15 +22,24 @@ else {
 			$address 	= mysqli_real_escape_string($mysqli, trim($_POST['address']));
 			$role 		= mysqli_real_escape_string($mysqli, trim($_POST['role']));
 
-            $query = mysqli_query($mysqli, "INSERT INTO usuario(NombreUsuario,Contrasenia,Cedula,NombreCompleto,
-            								Correo,Telefono,Direccion,Role)
-                                            VALUES('$usernameN','$passwordN','$cedula','$fullname','$email','$phone',
-                                            '$address','$role')")
-                                            or die('error: '.mysqli_error($mysqli));    
-          
-            if ($query) {
-                header("location: ../../main.php?module=user&alert=1");
-            }
+			$query_name = mysqli_query($mysqli,"SELECT NombreUsuario FROM usuario 
+				WHERE NombreUsuario='$usernameN'");
+			$count = mysqli_num_rows($query_name);
+
+			if ($count == 0) {
+
+	            $query = mysqli_query($mysqli, "INSERT INTO usuario(NombreUsuario,Contrasenia,Cedula,NombreCompleto,
+	            								Correo,Telefono,Direccion,Role)
+	                                            VALUES('$usernameN','$passwordN','$cedula','$fullname','$email','$phone',
+	                                            '$address','$role')")
+	                                            or die('error: '.mysqli_error($mysqli));    
+	          
+	            if ($query) {
+	                header("location: ../../main.php?module=user&alert=1");
+	            }
+	        }else{
+				header("location: ../../main.php?module=user&alert=8");
+	        }
 		}	
 	}
 	

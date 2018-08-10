@@ -22,7 +22,7 @@ if (isset($_GET['date_initial']) && isset($_GET['date_final'])) {
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml"> 
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Report Sales</title>
         <link rel="stylesheet" type="text/css" href="../../Content/assets/css/laporan.css" />
         <style type="text/css">
@@ -30,9 +30,12 @@ if (isset($_GET['date_initial']) && isset($_GET['date_final'])) {
         </style>
     </head>
     <body>
+    <br>
         <div>
-          <img style="height:40px;width: 120px;" src="../../Content/assets/img/logo.png" alt="Logo">
+          <img style="height:40px;width: 120px;" src="../../Content/assets/img/sysgym.png" alt="Logo">
         </div>
+        <br>
+        <br>
         <div>
            <table>
             <tr><td><span style="font-size:15px">SYSGYM</span></td></tr>
@@ -40,7 +43,7 @@ if (isset($_GET['date_initial']) && isset($_GET['date_final'])) {
         </div>
         <div>
            <table>
-            <tr><td>Report Sales And Invoice</td></tr>
+            <tr><td>Sales Report</td></tr>
            </table>
         </div>
     <?php  
@@ -70,7 +73,7 @@ if (isset($_GET['date_initial']) && isset($_GET['date_final'])) {
     ?>        
         <hr><br>
         <div id="isi">
-            <table width="100%" border="0.1" cellpadding="0" cellspacing="0">
+            <table width="100%" border="0.1" cellpadding="0" cellspacing="0" style="margin-left: 6px;">
                 <thead style="background:#e8ecee">
                     <tr class="tr-title">
                         <th height="20" style="width: 30px" align="center" valign="middle">NO.</th>
@@ -118,9 +121,9 @@ if (isset($_GET['date_initial']) && isset($_GET['date_final'])) {
                 </tbody>
                 <tfoot>
                     <tr valign="middle">
-                        <td colspan="5" style="text-align: right;height:15;"><strong>Total </strong></td>
+                        <td colspan="5" style="text-align: right;height:15;"><strong>Total en colones </strong></td>
                         <td style="text-align:center;height:15">
-                            <strong>$ <?php if ($count == 0) {
+                            <strong><?php if ($count == 0) {
                                 echo number_format(0,2);
                             } else {
                                 echo number_format($total,2); }?>
@@ -129,19 +132,19 @@ if (isset($_GET['date_initial']) && isset($_GET['date_final'])) {
                     </tr>
                 </tfoot>
             </table>
-            <page_footer>
-                <table class="page_footer">
-                    <tr>
-                        <td style="width: 50%; text-align: left">
-                            Page [[page_cu]]/[[page_nb]]
-                        </td>
-                        <td style="width: 50%; text-align: right">
-                            &copy; <?php echo "Developed by wsullivan "; echo  $anio=date('Y'); ?>
-                        </td>
-                    </tr>
-                </table>                
-            </page_footer>
         </div>
+        <page_footer>
+            <table class="page_footer">
+                <tr>
+                    <td style="width: 50%; text-align: left">
+                            Page [[page_cu]]/[[page_nb]]
+                    </td>
+                    <td style="width: 50%; text-align: right">
+                            &copy; <?php echo "Developed by wsullivan "; echo  $anio=date('Y'); ?>
+                    </td>
+                </tr>
+            </table>                
+        </page_footer>
     </body>
 </html>
 <?php

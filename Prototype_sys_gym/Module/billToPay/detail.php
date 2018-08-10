@@ -1,7 +1,7 @@
 <?php
 
-if (isset($_GET['id'])) {
-
+if (isset($_GET['id']) && isset($_GET['option'])) {
+  $option = $_GET['option'];
   $id_expense = $_GET['id'];
 
   $query = mysqli_query($mysqli, "SELECT cuentaGastos.IDCuentaGastos,cuentaGastos.IDProveedor,cuentaGastos.NumeroFactura,
@@ -44,7 +44,7 @@ if (isset($_GET['id'])) {
 
             <div class="form-group">
               <label class="col-sm-2 control-label">Amount</label>
-              <label style="text-align:left" class="col-sm-8 control-label">: $ <?php echo $data['Monto']; ?></label>
+              <label style="text-align:left" class="col-sm-8 control-label">: ₡ <?php echo $data['Monto']; ?></label>
             </div>            
 
             <div class="form-group">
@@ -81,8 +81,25 @@ if (isset($_GET['id'])) {
           <div class="box-footer">
             <div class="form-group">
               <br>
-              <div class="col-sm-offset-2 col-sm-10">                
-                <a href="?module=billToPay" class="btn btn-primary">Return to List</a>
+              <div class="col-sm-offset-2 col-sm-10">
+              <?php 
+              if ($_SESSION['Role'] == "Admin") {
+                if ($option == "Alerts") { ?>
+                  <a href="?module=payment_alert" class="btn btn-primary">Return to List</a>
+                <?php
+                } elseif($option == "View") { ?>
+                  <a href="?module=billToPay" class="btn btn-primary">Return to List</a>
+                <?php
+                }                
+              }elseif ($_SESSION['Role'] == "User") {
+                if ($option == "Alerts") { ?>
+                  <a href="?module=payment_alert" class="btn btn-primary">Return to List</a>
+                <?php
+                } elseif($option == "View") { ?>
+                  <a href="?module=billToPay" class="btn btn-primary">Return to List</a>
+                <?php
+                } 
+              }?>
               </div>
             </div>
           </div><!-- /.box footer -->

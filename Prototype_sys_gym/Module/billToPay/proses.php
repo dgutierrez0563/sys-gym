@@ -21,6 +21,12 @@ else {
 
 			$id_user = $_SESSION['IDUsuario'];
 
+			// $query_name = mysqli_query($mysqli,"SELECT  FROM usuario 
+			// 	WHERE NombreUsuario='$usernameN'");
+			// $count = mysqli_num_rows($query_name);
+
+			// if ($count == 0) {
+
             $query = mysqli_query($mysqli, "INSERT INTO cuentaGastos(IDProveedor,NumeroFactura,Monto,
             								FechaFactura,FechaVencimiento,EstadoFactura,created_user,updated_user)
                                             VALUES('$id_supplier','$invoice_number','$amount','$invoice_date',

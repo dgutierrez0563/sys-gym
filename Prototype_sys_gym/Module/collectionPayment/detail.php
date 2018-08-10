@@ -11,7 +11,6 @@ if (isset($_GET['id'])) {
     AND factura.updated_user=usuario.IDUsuario") 
     or die('error '.mysqli_error($mysqli));
   $data  = mysqli_fetch_assoc($query);
-  //$date = date_create($data['FechaFactura']);
 }
 ?>
 
@@ -51,7 +50,7 @@ if (isset($_GET['id'])) {
 
             <div class="form-group">
               <label class="col-sm-2 control-label">Amount</label>
-              <label style="text-align:left" class="col-sm-8 control-label">: $ <?php echo number_format($data['TotalVenta'],2); ?></label>
+              <label style="text-align:left" class="col-sm-8 control-label">: ₡ <?php echo number_format($data['TotalVenta'],2); ?></label>
             </div>            
 
             <div class="form-group">
@@ -81,8 +80,17 @@ if (isset($_GET['id'])) {
           <div class="box-footer">
             <div class="form-group">
               <br>
-              <div class="col-sm-offset-2 col-sm-10">                
-                <a href="?module=collection_alert" class="btn btn-primary">Return to List</a>
+              <div class="col-sm-offset-2 col-sm-10">
+              <?php  
+                if ($_SESSION['Role'] == "Admin") { ?>
+                  <a href="?module=collection_alert" class="btn btn-primary">Return to List</a>
+                <?php
+                }
+                elseif ($_SESSION['Role'] == "User"){ ?>
+                  <a href="?module=detailCollecttion" class="btn btn-primary">Return to List</a>
+                <?php
+                }
+              ?>
               </div>
             </div>
           </div><!-- /.box footer -->

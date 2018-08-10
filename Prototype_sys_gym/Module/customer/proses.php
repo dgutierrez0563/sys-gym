@@ -12,32 +12,41 @@ else {
 
 	if ($_GET['act']=='insert') {
 		if (isset($_POST['Guardar'])) {
-	
-			$identification  		= mysqli_real_escape_string($mysqli, trim($_POST['identification']));
-			$fullname  				= mysqli_real_escape_string($mysqli, trim($_POST['fullname']));
-			$email 					= mysqli_real_escape_string($mysqli, trim($_POST['email']));
-			$address 				= mysqli_real_escape_string($mysqli, trim($_POST['address']));
-			$birthdate 				= mysqli_real_escape_string($mysqli, trim($_POST['birthdate']));
-			$sex	 				= mysqli_real_escape_string($mysqli, trim($_POST['sex']));
-			$phone1 				= mysqli_real_escape_string($mysqli, trim($_POST['phone1']));
-			$phone2 				= mysqli_real_escape_string($mysqli, trim($_POST['phone2']));
-			$nationality			= mysqli_real_escape_string($mysqli, trim($_POST['nationality']));
-			$facebookaccount 		= mysqli_real_escape_string($mysqli, trim($_POST['facebookaccount']));
-			$twitteraccount 		= mysqli_real_escape_string($mysqli, trim($_POST['twitteraccount']));
 
-			$id_user = $_SESSION['IDUsuario'];
+			$identification  = mysqli_real_escape_string($mysqli, trim($_POST['identification']));
+			$query_dni = mysqli_query($mysqli,"SELECT Cedula FROM cliente WHERE Cedula='$identification'");
+			$count = mysqli_num_rows($query_dni);
 
-            $query = mysqli_query($mysqli, "INSERT INTO cliente(Cedula,NombreCompleto,Correo,
-            								Direccion,FechaNacimiento,Sexo,Telefono1,Telefono2,
-            								Nacionalidad,Facebook,Twitter,created_user,updated_user)
-                                            VALUES('$identification','$fullname','$email','$address','$birthdate',
-                                            '$sex','$phone1','$phone2','$nationality','$facebookaccount',
-                                            '$twitteraccount','$id_user','$id_user')")
-                                            or die('error: '.mysqli_error($mysqli));    
-          
-            if ($query) {
-                header("location: ../../main.php?module=customer&alert=1");
-            }
+			if ($count == 0 ) {
+				$fullname  				= mysqli_real_escape_string($mysqli, trim($_POST['fullname']));
+				$email 					= mysqli_real_escape_string($mysqli, trim($_POST['email']));
+				$address 				= mysqli_real_escape_string($mysqli, trim($_POST['address']));
+				$birthdate 				= mysqli_real_escape_string($mysqli, trim($_POST['birthdate']));
+				$sex	 				= mysqli_real_escape_string($mysqli, trim($_POST['sex']));
+				$phone1 				= mysqli_real_escape_string($mysqli, trim($_POST['phone1']));
+				$phone2 				= mysqli_real_escape_string($mysqli, trim($_POST['phone2']));
+				$nationality			= mysqli_real_escape_string($mysqli, trim($_POST['nationality']));
+				$facebookaccount 		= mysqli_real_escape_string($mysqli, trim($_POST['facebookaccount']));
+				$twitteraccount 		= mysqli_real_escape_string($mysqli, trim($_POST['twitteraccount']));
+
+				$id_user = $_SESSION['IDUsuario'];
+
+	            $query = mysqli_query($mysqli, "INSERT INTO cliente(Cedula,NombreCompleto,Correo,
+	            								Direccion,FechaNacimiento,Sexo,Telefono1,Telefono2,
+	            								Nacionalidad,Facebook,Twitter,created_user,updated_user)
+	                                            VALUES('$identification','$fullname','$email','$address','$birthdate',
+	                                            '$sex','$phone1','$phone2','$nationality','$facebookaccount',
+	                                            '$twitteraccount','$id_user','$id_user')")
+	                                            or die('error: '.mysqli_error($mysqli));    
+	          
+	            if ($query) {
+	                header("location: ../../main.php?module=customer&alert=1");
+	            }
+			}
+			else{
+				header("location: ../../main.php?module=customer&alert=5");
+			}
+			
 		}	
 	}
 	
@@ -111,34 +120,6 @@ else {
                 header("location: ../../main.php?module=customer&alert=4");
             }
 		}
-	}
-
-	elseif (isset($_GET['term'])){
-		$return_arr = array();
-	/* If connection to database, run sql statement. */
-		if ($mysqli)
-		{
-			
-			$query = mysqli_query($mysqli, "SELECT * FROM cliente WHERE Cedula LIKE '%" . mysqli_real_escape_string($mysqli,($_GET['term'])) . "%' LIMIT 0 ,10"); 
-			
-			/* Retrieve and store in array the results of the query.*/
-			while ($row = mysqli_fetch_array($query)) {
-				$id_customer=$row['IDCliente'];
-				$row_array['value'] = $row['Cedula'];
-				$row_array['id_customer']=$id_customer;
-				$row_array['cedula']=$row['Cedula'];
-				$row_array['customer_name']=$row['NombreCompleto'];
-				$row_array['phone1']=$row['Telefono1'];
-				$row_array['email']=$row['Correo'];
-				array_push($return_arr,$row_array);
-		    }
-			
-		}
-		/* Free connection resources. */
-		//mysqli_close($mysqli);
-
-		/* Toss back results as json encoded array. */
-		echo json_encode($return_arr);
 	}
 }		
 ?>

@@ -14,24 +14,34 @@ else {
 		if (isset($_POST['Guardar'])) {
 	
 			$legalidentification  	= mysqli_real_escape_string($mysqli, trim($_POST['legalidentification']));
-			$supplier  				= mysqli_real_escape_string($mysqli, trim($_POST['supplier']));
-			$email 					= mysqli_real_escape_string($mysqli, trim($_POST['email']));
-			$address 				= mysqli_real_escape_string($mysqli, trim($_POST['address']));
-			$phone1 				= mysqli_real_escape_string($mysqli, trim($_POST['phone1']));
-			$phone2 				= mysqli_real_escape_string($mysqli, trim($_POST['phone2']));
-			$representative 		= mysqli_real_escape_string($mysqli, trim($_POST['representative']));
+			$query_dni = mysqli_query($mysqli,"SELECT CedulaJuridica FROM proveedor 
+						WHERE CedulaJuridica='$legalidentification'");
+			$count = mysqli_num_rows($query_dni);
 
-			$id_user = $_SESSION['IDUsuario'];
+			if ($count == 0) {
+				$supplier  				= mysqli_real_escape_string($mysqli, trim($_POST['supplier']));
+				$email 					= mysqli_real_escape_string($mysqli, trim($_POST['email']));
+				$address 				= mysqli_real_escape_string($mysqli, trim($_POST['address']));
+				$phone1 				= mysqli_real_escape_string($mysqli, trim($_POST['phone1']));
+				$phone2 				= mysqli_real_escape_string($mysqli, trim($_POST['phone2']));
+				$representative 		= mysqli_real_escape_string($mysqli, trim($_POST['representative']));
 
-            $query = mysqli_query($mysqli, "INSERT INTO proveedor(CedulaJuridica,NombreProveedor,Correo,Direccion,
-            								Telefono1,Telefono2,Representante,created_user,updated_user)
-                                            VALUES('$legalidentification','$supplier','$email','$address','$phone1',
-                                            '$phone2','$representative','$id_user','$id_user')")
-                                            or die('error: '.mysqli_error($mysqli));    
-          
-            if ($query) {
-                header("location: ../../main.php?module=supplier&alert=1");
-            }
+				$id_user = $_SESSION['IDUsuario'];
+
+	            $query = mysqli_query($mysqli, "INSERT INTO proveedor(CedulaJuridica,NombreProveedor,Correo,Direccion,
+	            								Telefono1,Telefono2,Representante,created_user,updated_user)
+	                                            VALUES('$legalidentification','$supplier','$email','$address','$phone1',
+	                                            '$phone2','$representative','$id_user','$id_user')")
+	                                            or die('error: '.mysqli_error($mysqli));    
+	          
+	            if ($query) {
+	                header("location: ../../main.php?module=supplier&alert=1");
+	            }				
+			}
+			else{
+				header("location: ../../main.php?module=supplier&alert=5");
+			}
+
 		}	
 	}
 	

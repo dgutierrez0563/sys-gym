@@ -20,7 +20,7 @@ if ($_GET['form']=='add') { ?>
       <i class="fa fa-edit icon-title"></i> Add Subscription
     </h1>
     <ol class="breadcrumb">
-      <li><a href="?module=berenda"><i class="fa fa-home"></i> Home </a></li>
+      <li><a href="?module=start"><i class="fa fa-home"></i> Home </a></li>
       <li><a href="?module=subscription"> Subscription </a></li>
       <li class="active"> Add </li>
     </ol>
@@ -83,7 +83,7 @@ if ($_GET['form']=='add') { ?>
                 <label for="rate" class="col-sm-2 control-label">Rate</label>
                 <div class="col-sm-5">
                   <div class="input-group">
-                    <span class="input-group-addon">$.</span>
+                    <span class="input-group-addon">₡.</span>
                     <input type="text" class="form-control" id="rate" name="rate" readonly required>
                   </div>
                 </div>
@@ -124,10 +124,11 @@ if ($_GET['form']=='add') { ?>
 elseif ($_GET['form']=='edit') { 
   	if (isset($_GET['id'])) {
 
-      $query = mysqli_query($mysqli, "SELECT subscripcion.IDSubscripcion,subscripcion.IDCliente,subscripcion.IDPlan,
-      subscripcion.FechaSubscripcion,cliente.IDCliente,cliente.Cedula,cliente.NombreCompleto FROM subscripcion,cliente 
-      WHERE subscripcion.IDSubscripcion='$_GET[id]' AND subscripcion.IDCliente=cliente.IDCliente") 
-      or die('error: '.mysqli_error($mysqli));
+      $query = mysqli_query($mysqli, "SELECT subscripcion.IDSubscripcion,subscripcion.IDFactura,subscripcion.IDCliente,
+        subscripcion.IDPlan,subscripcion.FechaSubscripcion,cliente.IDCliente,cliente.Cedula,
+        cliente.NombreCompleto FROM subscripcion,cliente WHERE subscripcion.IDSubscripcion='$_GET[id]' 
+        AND subscripcion.IDCliente=cliente.IDCliente") 
+        or die('error: '.mysqli_error($mysqli));
 
       $data  = mysqli_fetch_assoc($query);
   	}
@@ -138,11 +139,11 @@ elseif ($_GET['form']=='edit') {
 
   <section class="content-header">
     <h1>
-      <i class="fa fa-edit icon-title"></i> Modify Plan Data
+      <i class="fa fa-edit icon-title"></i> Modify Subscription Data
     </h1>
     <ol class="breadcrumb">
-      <li><a href="?module=berenda"><i class="fa fa-home"></i> Home</a></li>
-      <li><a href="?module=plan"> Plan </a></li>
+      <li><a href="?module=start"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="?module=plan"> Subscription </a></li>
       <li class="active"> Modify </li>
     </ol>
   </section>
@@ -157,6 +158,8 @@ elseif ($_GET['form']=='edit') {
             <div class="box-body">
               
               <input type="hidden" name="id_subscription" value="<?php echo $data['IDSubscripcion']; ?>">
+              <input type="hidden" name="id_invoice" value="<?php echo $data['IDFactura']; ?>">
+              <input type="hidden" name="date" value="<?php echo $data['FechaSubscripcion']; ?>">
 
               <br>
               <div class="form-group">
@@ -196,7 +199,7 @@ elseif ($_GET['form']=='edit') {
                 <label for="rate" class="col-sm-2 control-label">Rate</label>
                 <div class="col-sm-5">
                   <div class="input-group">
-                    <span class="input-group-addon">$.</span>
+                    <span class="input-group-addon">₡.</span>
                     <input type="text" class="form-control" id="rate" name="rate" readonly required>
                   </div>
                 </div>

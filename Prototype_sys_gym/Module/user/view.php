@@ -1,7 +1,7 @@
 
 <section class="content-header">
   <h1>
-    <i class="fa fa-user icon-title"></i> Management of Users
+    <i class="fa fa-user icon-title"></i> User Management
 
     <a class="btn btn-primary btn-social pull-right" href="?module=form_user&form=add" title="Agregar" data-toggle="tooltip">
       <i class="fa fa-plus"></i> Add User
@@ -76,10 +76,18 @@
                Allowed files: *.JPG, *.JPEG, *.PNG.
             </div>";
     }
+    elseif ($_GET['alert'] == 8) {
+      echo "<div class='alert alert-danger alert-dismissable'>
+              <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+              <h4>  <i class='icon fa fa-times-circle'></i> Error!</h4>
+              Please, check the required fields.
+            </div>";
+    }
     ?>
 
       <div class="box box-primary">
-        <div class="box-body">     
+        <div class="box-body">
+        <div class="table-responsive">
           <table id="dataTables1" class="table row-border table-hover">
             <thead>
               <tr class="info">
@@ -148,6 +156,7 @@
             ?>
             </tbody>
           </table>
+          </div>
         </div><!-- /.box-body -->
       </div><!-- /.box -->
     </div><!--/.col -->

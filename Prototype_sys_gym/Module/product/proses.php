@@ -11,23 +11,31 @@ else {
 	if ($_GET['act']=='insert') {
 		if (isset($_POST['Guardar'])) {
 	
-			$nameproduct  	= mysqli_real_escape_string($mysqli, trim($_POST['nameproduct']));			
-			$price 			= mysqli_real_escape_string($mysqli, trim($_POST['price']));
-			$quantity  		= mysqli_real_escape_string($mysqli, trim($_POST['quantity']));
-			$id_supplier	= mysqli_real_escape_string($mysqli, trim($_POST['id_supplier']));
-			$detail 		= mysqli_real_escape_string($mysqli, trim($_POST['detail']));
+			$nameproduct  	= mysqli_real_escape_string($mysqli, trim($_POST['nameproduct']));
+			$query_dni = mysqli_query($mysqli,"SELECT NombreProducto FROM producto WHERE NombreProducto='$nameproduct'");
+			$count = mysqli_num_rows($query_dni);
 
-			$id_user = $_SESSION['IDUsuario'];
+			if ($count == 0) {
+				$price 			= mysqli_real_escape_string($mysqli, trim($_POST['price']));
+				$quantity  		= mysqli_real_escape_string($mysqli, trim($_POST['quantity']));
+				$id_supplier	= mysqli_real_escape_string($mysqli, trim($_POST['id_supplier']));
+				$detail 		= mysqli_real_escape_string($mysqli, trim($_POST['detail']));
 
-            $query = mysqli_query($mysqli, "INSERT INTO producto(NombreProducto,Precio,Cantidad,
-            								IDProveedor,Detalle,created_user,updated_user)
-                                            VALUES('$nameproduct','$price','$quantity','$id_supplier','$detail',
-                                            '$id_user','$id_user')")
-                                            or die('error: '.mysqli_error($mysqli));              
-            
-            if ($query) {
-                header("location: ../../main.php?module=product&alert=1");
-            }
+				$id_user = $_SESSION['IDUsuario'];
+
+	            $query = mysqli_query($mysqli, "INSERT INTO producto(NombreProducto,Precio,Cantidad,
+	            								IDProveedor,Detalle,created_user,updated_user)
+	                                            VALUES('$nameproduct','$price','$quantity','$id_supplier','$detail',
+	                                            '$id_user','$id_user')")
+	                                            or die('error: '.mysqli_error($mysqli));              
+	            
+	            if ($query) {
+	                header("location: ../../main.php?module=product&alert=1");
+	            }
+			}
+			else{
+				header("location: ../../main.php?module=product&alert=5");
+			}
 		}	
 	}	
 	elseif ($_GET['act']=='update') {

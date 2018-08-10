@@ -2,7 +2,7 @@
   if ($_SESSION['Role'] == "Admin") { ?>    
     <section class="content-header">
       <h1>
-        <i class="glyphicon glyphicon-tags icon-title"></i> Payment Alerts
+        <i class="glyphicon glyphicon-tags icon-title"></i> Payment Alert
       </h1>
     </section>
 
@@ -35,7 +35,8 @@
         ?>
 
           <div class="box box-primary">
-            <div class="box-body">     
+            <div class="box-body">
+            <div class="table-responsive">
               <table id="dataTables1" class="table row-border table-hover">
                 <thead>
                   <tr class="info">
@@ -76,7 +77,7 @@
                           <td class='center'>$no</td>
                           <td>$data[NumeroFactura]</td>
                           <td>$data[NombreProveedor]</td>
-                          <td>$amount_aux</td>
+                          <td>₡ $amount_aux</td>
                           <td class='center'>$date_aux</td> ";
 
                           if($data['EstadoFactura'] == "Paid"){?>
@@ -89,12 +90,13 @@
                             ?>
                           <td class="center">
                             <div>
-                            <?php 
+                            <?php
+                            $option_aux = "Alerts";
                             echo "
                                 <a data-toggle='tooltip' data-placement='top' title='PAY' style='margin-right:1px;' class='btn btn-success btn-xs' href='Module/billToPay/proses.php?act=pay&id=$data[IDCuentaGastos]'>
                                     <i style='color:#fff' class='glyphicon glyphicon-ok'></i>
                                 </a>
-                                <a data-toggle='tooltip' data-placement='top' title='VIEW'  class='btn btn-info btn-xs' href='?module=detailExpsense&detail&id=$data[IDCuentaGastos]'>
+                                <a data-toggle='tooltip' data-placement='top' title='VIEW'  class='btn btn-info btn-xs' href='?module=detailExpsense&detail&id=$data[IDCuentaGastos]&option=$option_aux'>
                                     <i style='color:#fff' class='glyphicon glyphicon-eye-open'></i>
                                 </a>                          
                             </div>         
@@ -103,6 +105,7 @@
                   $no++; } ?>
                 </tbody>
               </table>
+              </div>
             </div><!-- /.box-body -->
           </div><!-- /.box -->
         </div><!--/.col -->
@@ -110,7 +113,7 @@
     </section><!-- /.content -->
 
   <?php }
-  else{ ?>
+  elseif ($_SESSION['Role'] == "User") { ?>
     <section class="content-header">
       <h1>
         <i class="glyphicon glyphicon-tags icon-title"></i> Management of Payment Alerts
@@ -146,14 +149,15 @@
         ?>
 
           <div class="box box-primary">
-            <div class="box-body">     
-              <table id="dataTables1" class="table table-bordered table-striped table-hover">
+            <div class="box-body">
+            <div class="table-responsive">
+              <table id="dataTables1" class="table row-border table-hover">
                 <thead>
-                  <tr style="width: auto;">
+                  <tr class="info">
                     <th class="center">No.</th>
-                    <th class="center">No. Invoice</th>
-                    <th class="center">Supplier</th>
-                    <th class="center">Amount</th>
+                    <th>No. Invoice</th>
+                    <th>Supplier</th>
+                    <th>Amount</th>
                     <th class="center">Expira</th>
                     <th class="center">Condition</th>
                     <th class="center">Actions</th>
@@ -169,21 +173,26 @@
                 while ($data = mysqli_fetch_assoc($query)) { 
                   $amount_aux = $data['Monto'];
                   $amount_aux = number_format($amount_aux,2);
+                  //$date = date_format($data['FechaVencimiento'],'m-d-Y');
+              
+                  $date = date_create($data['FechaVencimiento']);
+                  $date_aux = date_format($date,'m-d-Y');
+
                   if ($data['EstadoFactura'] == "Paid") {
                     # code...
                     $invoice_status_aux = "Paid";
                     $label_class = "label-success";
                   }
                   else{
-                    $invoice_status_aux = "Credit";
+                    $invoice_status_aux = "Pending";
                     $label_class = 'label-warning';
                   }
                   echo "<tr style='width: auto;'>
                           <td class='center'>$no</td>
                           <td>$data[NumeroFactura]</td>
                           <td>$data[NombreProveedor]</td>
-                          <td>$amount_aux</td>
-                          <td>$data[FechaVencimiento]</td> ";
+                          <td>₡ $amount_aux</td>
+                          <td class='center'>$date_aux</td> ";
 
                           if($data['EstadoFactura'] == "Paid"){?>
 
@@ -195,9 +204,10 @@
                             ?>
                           <td class="center">
                             <div>
-                            <?php 
+                            <?php
+                            $option_aux = "Alerts";
                             echo "
-                                <a data-toggle='tooltip' data-placement='top' title='VIEW'  class='btn btn-info btn-xs' href='?module=detailExpsense&detail&id=$data[IDCuentaGastos]'>
+                                <a data-toggle='tooltip' data-placement='top' title='VIEW'  class='btn btn-info btn-xs' href='?module=detailExpsense&detail&id=$data[IDCuentaGastos]&option=$option_aux'>
                                     <i style='color:#fff' class='glyphicon glyphicon-eye-open'></i>
                                 </a>                          
                             </div>         

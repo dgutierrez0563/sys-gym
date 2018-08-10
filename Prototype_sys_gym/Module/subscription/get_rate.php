@@ -20,7 +20,7 @@
               <label class='col-sm-2 control-label'>Rate</label>
               <div class='col-sm-5'>
                 <div class='input-group'>
-                  <span class='input-group-addon'>$.</span>
+                  <span class='input-group-addon'>₡.</span>
                   <input type='text' class='form-control' id='rate' name='rate' value='$rate' readonly>
                 </div>
               </div>
@@ -30,7 +30,7 @@
               <label class='col-sm-2 control-label'>Rate</label>
               <div class='col-sm-5'>
                 <div class='input-group'>
-                  <span class='input-group-addon'>$.</span>
+                  <span class='input-group-addon'>₡.</span>
                   <input type='text' class='form-control' id='rate' name='rate' value='' readonly>                  
                 </div>
               </div>

@@ -9,7 +9,7 @@
     <meta name="author" content="wsullivan" />
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="Content/assets/img/logo_v3.ico" />
+    <link rel="shortcut icon" href="Content/assets/img/corredor-ico.svg" />
 
     <!-- Bootstrap 3.3.2 -->
     <link href="Content/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -26,7 +26,7 @@
   <body class="login-page bg-login">
     <div class="login-box">
       <div style="color:#0480C8;" class="login-logo">
-        <img style="margin-top:-10px" src="Content/assets/img/logo.png" alt="Logo" height="80" height="150" ><b></b>
+        <img style="margin-top:-10px" src="Content/assets/img/corredor.svg" alt="Logo" height="80" height="150" ><b>SYSGYM</b>
       </div><!-- /.login-logo -->
       <?php  
  

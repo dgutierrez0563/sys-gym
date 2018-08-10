@@ -31,7 +31,7 @@ if (isset($_SESSION['IDUsuario'])) {
     elseif ($_GET['alert'] == 1) {
       echo "<div class='alert alert-success alert-dismissable'>
               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-              <h4>  <i class='icon fa fa-check-circle'></i> Exito!</h4>
+              <h4>  <i class='icon fa fa-check-circle'></i> Success!</h4>
               User profile successfully updated.
             </div>";
     }

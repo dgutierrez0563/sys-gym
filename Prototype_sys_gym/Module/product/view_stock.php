@@ -38,12 +38,13 @@
               <p><span class="label" style="font-size: 16px;font-weight: bold;background-color: #FF0C00;"><i class="glyphicon glyphicon-exclamation-sign"> Low Stock</i></span></p>
             </div>
           </div>
+          <div class="table-responsive">
           <table id="dataTables1" class="table row-border table-hover">
             <thead>
               <tr class="info">
                 <th class="center">No.</th>
-                <th class="center">Name Product</th>
-                <th class="center">Price</th>
+                <th>Name Product</th>
+                <th>Price</th>
                 <th class="center">Quantity</th>
                 <th class="center">Status</th>
               </tr>
@@ -64,7 +65,7 @@
               echo "<tr width='20'>
                       <td class='center'>$no</td>
                       <td>$data[NombreProducto]</td>
-                      <td>$price_aux</td>"; ?>
+                      <td>₡ $price_aux</td>"; ?>
                       <?php
                       $qty_aux = $data['Cantidad'] ;
                         if ($qty_aux <= 20) { ?>
@@ -78,6 +79,7 @@
               <?php $no++; } ?>
             </tbody>
           </table>
+          </div>
         </div><!-- /.box-body -->
       </div><!-- /.box -->
     </div><!--/.col -->

@@ -42,10 +42,10 @@ require_once "Config/database.php";
     <!-- Menu Footer-->
     <li class="user-footer">
       <div class="pull-left">
-        <a style="width:80px" href="?module=profileUserOn" class="btn btn-default btn-flat">Profile</a>
+        <a style="width:80px" href="?module=profileUserOn" class="btn btn-info btn-flat">Profile</a>
       </div>
       <div class="pull-right">
-        <a style="width:80px" data-toggle="modal" href="#logout" class="btn btn-default btn-flat">Log Out</a>
+        <a style="width:80px" data-toggle="modal" href="#logout" class="btn btn-warning btn-flat">Logout</a>
       </div>
     </li>
   </ul>

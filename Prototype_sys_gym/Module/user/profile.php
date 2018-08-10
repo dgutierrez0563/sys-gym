@@ -28,7 +28,7 @@ if (isset($_GET['id'])) {
       <div class="box box-primary">
         <!-- form start -->
         <form role="form" class="form-horizontal"  enctype="multipart/form-data">
-          <div class="box-body">      
+          <div class="box-body">  
             
             <div class="form-group">
               <label class="col-sm-2 control-label">

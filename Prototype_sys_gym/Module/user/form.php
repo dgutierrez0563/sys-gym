@@ -8,7 +8,7 @@ if ($_GET['form']=='add') { ?>
       <i class="fa fa-edit icon-title"></i> Add User
     </h1>
     <ol class="breadcrumb">
-      <li><a href="?module=berenda"><i class="fa fa-home"></i> Home </a></li>
+      <li><a href="?module=start"><i class="fa fa-home"></i> Home </a></li>
       <li><a href="?module=user"> User </a></li>
       <li class="active"> Add </li>
     </ol>
@@ -25,9 +25,11 @@ if ($_GET['form']=='add') { ?>
               <div class="form-group">
                 <label class="col-sm-2 control-label">User Name</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="usernameN" autocomplete="off" required>
+                  <input type="text" class="form-control" id="usernameN" name="usernameN" autocomplete="off" required>
                 </div>
               </div>
+              
+              <div id="resultado_username"></div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">Password</label>
@@ -39,9 +41,11 @@ if ($_GET['form']=='add') { ?>
               <div class="form-group">
                 <label class="col-sm-2 control-label">Identification</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="cedula" autocomplete="off" onKeyPress="return goodchars(event,'0123456789',this)" required>
+                  <input type="text" class="form-control" id="cedula" name="cedula" autocomplete="off" onKeyPress="return goodchars(event,'0123456789',this)" required>
                 </div>
               </div>
+              
+              <div id="resultado_user"></div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">Full Name</label>
@@ -53,7 +57,8 @@ if ($_GET['form']=='add') { ?>
               <div class="form-group">
                 <label class="col-sm-2 control-label">Email</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="email" autocomplete="off" required>
+                  <input type="text" class="form-control" id="email" name="email" autocomplete="off" maxlength="50" onKeyUp="javascript:validateEmail('email')" required>
+                  <div><h5 id="emailStatus" style="font-weight: bold;vertical-align: middle;" class="text-danger"></h5></div>
                 </div>
               </div>             
 
@@ -116,7 +121,7 @@ elseif ($_GET['form']=='edit') {
       <i class="fa fa-edit icon-title"></i> Modify User Data
     </h1>
     <ol class="breadcrumb">
-      <li><a href="?module=berenda"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="?module=start"><i class="fa fa-home"></i> Home</a></li>
       <li><a href="?module=user"> User </a></li>
       <li class="active"> Modify </li>
     </ol>
@@ -136,9 +141,11 @@ elseif ($_GET['form']=='edit') {
               <div class="form-group">
                 <label class="col-sm-2 control-label">User Name</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="usernameN" autocomplete="off" value="<?php echo $data['NombreUsuario']; ?>" required>
+                  <input type="text" class="form-control" id="usernameN" name="usernameN" autocomplete="off" value="<?php echo $data['NombreUsuario']; ?>" required>
                 </div>
               </div>
+
+              <div id="resultado_username"></div>
 
               <div class="form-group">
                 <label class="col-sm-2 control-label">Identification</label>
@@ -157,7 +164,8 @@ elseif ($_GET['form']=='edit') {
               <div class="form-group">
                 <label class="col-sm-2 control-label">Email</label>
                 <div class="col-sm-5">
-                  <input type="text" class="form-control" name="email" autocomplete="off" value="<?php echo $data['Correo']; ?>" required>
+                  <input type="text" class="form-control" id="email" name="email" autocomplete="off" value="<?php echo $data['Correo']; ?>" maxlength="50" onKeyUp="javascript:validateEmail('email')" required>
+                  <div><h5 id="emailStatus" style="font-weight: bold;vertical-align: middle;" class="text-danger"></h5></div>
                 </div>
               </div>
 
